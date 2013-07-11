@@ -43,3 +43,9 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Annotate models and such
+gem 'annotate', ">=2.5.0"
+
+# Tagging
+gem 'acts-as-taggable-on'

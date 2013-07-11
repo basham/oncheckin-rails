@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Oncheckin::Application.load_tasks
+OnCheckIn::Application.load_tasks

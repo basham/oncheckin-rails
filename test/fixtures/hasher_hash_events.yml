@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hasher_id: 1
+  hash_event_id: 1
+  hare: false
+  visitor: false
+  virgin: false
+
+two:
+  hasher_id: 1
+  hash_event_id: 1
+  hare: false
+  visitor: false
+  virgin: false

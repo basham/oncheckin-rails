@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: hash_events
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  start_time  :datetime
+#  description :text
+#  notes       :text
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  start_time: 2013-07-04 14:12:05
+  description: MyText
+  notes: MyText
+
+two:
+  name: MyString
+  start_time: 2013-07-04 14:12:05
+  description: MyText
+  notes: MyText

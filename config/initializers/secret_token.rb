@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Oncheckin::Application.config.secret_key_base = '4ac4694c54e04ac300b4059f9b4f9c458cfe18888b05a31a425a65a2e574e91acf6319edf0054583dad741637e4d115151516cd2d6949a572fde5811703b97c4'
+OnCheckIn::Application.config.secret_key_base = '4ac4694c54e04ac300b4059f9b4f9c458cfe18888b05a31a425a65a2e574e91acf6319edf0054583dad741637e4d115151516cd2d6949a572fde5811703b97c4'

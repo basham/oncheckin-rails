@@ -1,4 +1,17 @@
-Oncheckin::Application.routes.draw do
+OnCheckIn::Application.routes.draw do
+  scope :api do
+    scope '1' do
+      shallow do
+        resources :kennels do
+          resources :events, :hashers
+        end
+        resources :hashers do
+          resources :events, :kennels
+        end
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
