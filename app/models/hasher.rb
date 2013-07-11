@@ -22,8 +22,8 @@ class Hasher < ActiveRecord::Base
 		hash = super options
 
 		hash[:affiliation_count] = affiliations.count
-		hash[:attendance_count] = attendances.count
-		hash[:hare_count] = hares.count
+		hash[:attendance_count] = affiliations.sum(:attendance_count)
+		hash[:hare_count] = affiliations.sum(:hare_count)
 
 		hash[:affiliations] = affiliations.map do |a|
 			a.serializable_hash({
