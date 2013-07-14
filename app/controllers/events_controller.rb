@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
 
 	def index
-		# Kennel events
-		return render json: Kennel.find(params[:kennel_id]).events if params.has_key?(:kennel_id)
-		# Hasher events
-		return render json: Hasher.find(params[:hasher_id]).events if params.has_key?(:hasher_id)
+		# Chapter events
+		return render json: Chapter.find(params[:chapter_id]).events if params.has_key?(:chapter_id)
+		# Participant events
+		return render json: Participant.find(params[:participant_id]).events if params.has_key?(:participant_id)
 	end
 
 end

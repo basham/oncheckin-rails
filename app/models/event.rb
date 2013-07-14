@@ -13,17 +13,17 @@
 #
 
 class Event < ActiveRecord::Base
-	belongs_to :kennel
+	belongs_to :chapter
 	has_many :attendances
-	has_many :hashers, through: :attendances
+	has_many :participants, through: :attendances
 
 	def hares
-		# Only hashers
-		#ids = attendances.tagged_with('hare').collect { |a| a.hasher_id }
-		#Hasher.find( ids )
+		# Only participants
+		#ids = attendances.tagged_with('hare').collect { |a| a.participant_id }
+		#Participant.find( ids )
 
-		# Nested `attendence > hasher` model
-		attendances.includes(:hasher).tagged_with('hare')
+		# Nested `attendence > participant` model
+		attendances.includes(:participant).tagged_with('hare')
 	end
 
 	def serializable_hash(options={})

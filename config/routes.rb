@@ -2,11 +2,11 @@ OnCheckIn::Application.routes.draw do
   scope :api do
     scope '1' do
       shallow do
-        resources :kennels do
-          resources :events, :hashers
+        resources :chapters do
+          resources :events, :participants
         end
-        resources :hashers do
-          resources :events, :kennels
+        resources :participants do
+          resources :events, :chapters
         end
       end
     end

@@ -17,8 +17,8 @@
 #
 
 class Affiliation < ActiveRecord::Base
-	belongs_to :kennel
-	belongs_to :hasher
+	belongs_to :chapter
+	belongs_to :participant
 
 	def serializable_hash(options={})
 		default = { except: [:created_at, :updated_at] }

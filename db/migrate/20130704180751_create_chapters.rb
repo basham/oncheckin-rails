@@ -1,8 +1,9 @@
-class CreateKennels < ActiveRecord::Migration
+class CreateChapters < ActiveRecord::Migration
   def change
-    create_table :kennels do |t|
+    create_table :chapters do |t|
       t.string :name
       t.string :location
+      t.string :timezone
       t.string :url
       t.text :description
 

@@ -1,23 +1,23 @@
 class CreateAffiliations < ActiveRecord::Migration
   def change
     create_table :affiliations do |t|
-      t.belongs_to :hasher
-      t.belongs_to :kennel
+      t.belongs_to :participant
+      t.belongs_to :chapter
       
       t.integer :recorded_attendance_count
-      t.integer :recorded_hare_count
+      t.integer :recorded_host_count
       t.date :recorded_since
 
       t.integer :unrecorded_attendance_count
-      t.integer :unrecorded_hare_count
+      t.integer :unrecorded_host_count
 
       t.integer :attendance_count
-      t.integer :hare_count
+      t.integer :host_count
 
       t.timestamps
     end
 
-    add_index :affiliations, :hasher_id
-    add_index :affiliations, :kennel_id
+    add_index :affiliations, :participant_id
+    add_index :affiliations, :chapter_id
   end
 end

@@ -14,24 +14,24 @@
 ActiveRecord::Schema.define(version: 20130705031755) do
 
   create_table "affiliations", force: true do |t|
-    t.integer  "hasher_id"
-    t.integer  "kennel_id"
+    t.integer  "participant_id"
+    t.integer  "chapter_id"
     t.integer  "recorded_attendance_count"
-    t.integer  "recorded_hare_count"
+    t.integer  "recorded_host_count"
     t.date     "recorded_since"
     t.integer  "unrecorded_attendance_count"
-    t.integer  "unrecorded_hare_count"
+    t.integer  "unrecorded_host_count"
     t.integer  "attendance_count"
-    t.integer  "hare_count"
+    t.integer  "host_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "affiliations", ["hasher_id"], name: "index_affiliations_on_hasher_id"
-  add_index "affiliations", ["kennel_id"], name: "index_affiliations_on_kennel_id"
+  add_index "affiliations", ["chapter_id"], name: "index_affiliations_on_chapter_id"
+  add_index "affiliations", ["participant_id"], name: "index_affiliations_on_participant_id"
 
   create_table "attendances", force: true do |t|
-    t.integer  "hasher_id"
+    t.integer  "participant_id"
     t.integer  "event_id"
     t.string   "tags"
     t.datetime "created_at"
@@ -39,33 +39,35 @@ ActiveRecord::Schema.define(version: 20130705031755) do
   end
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
-  add_index "attendances", ["hasher_id"], name: "index_attendances_on_hasher_id"
+  add_index "attendances", ["participant_id"], name: "index_attendances_on_participant_id"
+
+  create_table "chapters", force: true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.string   "timezone"
+    t.string   "url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", force: true do |t|
-    t.integer  "kennel_id"
+    t.integer  "chapter_id"
     t.string   "name"
     t.datetime "start_time"
+    t.datetime "end_time"
     t.text     "description"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "events", ["kennel_id"], name: "index_events_on_kennel_id"
+  add_index "events", ["chapter_id"], name: "index_events_on_chapter_id"
 
-  create_table "hashers", force: true do |t|
+  create_table "participants", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "hash_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "kennels", force: true do |t|
-    t.string   "name"
-    t.string   "location"
-    t.string   "url"
-    t.text     "description"
+    t.string   "alias"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

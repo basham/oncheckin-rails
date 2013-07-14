@@ -10,9 +10,9 @@
 #  updated_at :datetime
 #
 
-class Hasher < ActiveRecord::Base
+class Participant < ActiveRecord::Base
 	has_many :affiliations
-	has_many :kennels, through: :affiliations
+	has_many :chapters, through: :affiliations
 	has_many :attendances
 	has_many :events, through: :attendances
 
@@ -23,23 +23,23 @@ class Hasher < ActiveRecord::Base
 
 		hash[:affiliation_count] = affiliations.count
 		hash[:attendance_count] = affiliations.sum(:attendance_count)
-		hash[:hare_count] = affiliations.sum(:hare_count)
+		hash[:host_count] = affiliations.sum(:host_count)
 
 		hash[:affiliations] = affiliations.map do |a|
 			a.serializable_hash({
-				except: [:hasher_id, :kennel_id],
+				except: [:participant_id, :chapter_id],
 				include: {
-					kennel: { only: [:id, :name] }
+					chapter: { only: [:id, :name] }
 				}
 			})
 		end
 
 		hash[:attendances] = attendances.map do |a|
 			a.serializable_hash({
-				except: [:hasher_id],
+				except: [:participant_id],
 				include: {
 					event: { only: [:id, :name, :start_time] },
-					kennel: { only: [:id, :name] }
+					chapter: { only: [:id, :name] }
 				}
 			})
 		end
@@ -47,11 +47,11 @@ class Hasher < ActiveRecord::Base
 		hash
 	end
 
-	def hares
-		attendances.tagged_with('hare')
+	def hosts
+		attendances.tagged_with('host')
 	end
 
-	def hares_by_kennel(kennel_id)
-		hares.includes(:event).where(events: { kennel_id: kennel_id })
+	def hosts_by_chapter(chapter_id)
+		hosts.includes(:event).where(events: { chapter_id: chapter_id })
 	end
 end
