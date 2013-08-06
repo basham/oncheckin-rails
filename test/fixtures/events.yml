@@ -3,9 +3,10 @@
 # Table name: events
 #
 #  id          :integer          not null, primary key
-#  kennel_id   :integer
+#  chapter_id  :integer
 #  name        :string(255)
 #  start_time  :datetime
+#  end_time    :datetime
 #  description :text
 #  notes       :text
 #  created_at  :datetime

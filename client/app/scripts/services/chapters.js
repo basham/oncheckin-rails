@@ -12,4 +12,7 @@ angular.module('oncheckinApp')
   })
   .factory('ChapterEvents', function ($resource) {
     return $resource('/api/1/chapters/:chapterId/events', { chapterId: '@id' });
-  });
+  })
+  .factory('Event', function ($resource) {
+    return $resource('/api/1/events/:eventId', { eventId: '@id' });
+  })

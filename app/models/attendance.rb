@@ -2,12 +2,12 @@
 #
 # Table name: attendances
 #
-#  id         :integer          not null, primary key
-#  hasher_id  :integer
-#  event_id   :integer
-#  tags       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id             :integer          not null, primary key
+#  participant_id :integer
+#  event_id       :integer
+#  tags           :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
 #
 
 class Attendance < ActiveRecord::Base

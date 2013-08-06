@@ -3,15 +3,15 @@
 # Table name: affiliations
 #
 #  id                          :integer          not null, primary key
-#  hasher_id                   :integer
-#  kennel_id                   :integer
+#  participant_id              :integer
+#  chapter_id                  :integer
 #  recorded_attendance_count   :integer
-#  recorded_hare_count         :integer
+#  recorded_host_count         :integer
 #  recorded_since              :date
 #  unrecorded_attendance_count :integer
-#  unrecorded_hare_count       :integer
+#  unrecorded_host_count       :integer
 #  attendance_count            :integer
-#  hare_count                  :integer
+#  host_count                  :integer
 #  created_at                  :datetime
 #  updated_at                  :datetime
 #

@@ -8,6 +8,7 @@ OnCheckIn::Application.routes.draw do
         resources :participants do
           resources :events, :chapters
         end
+        resources :events
       end
     end
   end

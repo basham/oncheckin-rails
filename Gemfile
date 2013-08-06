@@ -49,3 +49,6 @@ gem 'annotate', ">=2.5.0"
 
 # Tagging
 gem 'acts-as-taggable-on'
+
+# JSON serializing
+gem 'active_model_serializers'
