@@ -1,0 +1,7 @@
+<h3>Hashes</h3>
+<ul>
+	<li ng-repeat="event in events">
+		<a ui-sref="app.events.detail({ eventId: event.id })">{{event.name}}</a>
+		<p>{{event.start_time | date:'fullDate'}}</p>
+	</li>
+</ul>

@@ -1,0 +1,13 @@
+<a ui-sref="app.chapters">Kennels</a>
+<h1>{{chapter.name}}</h1>
+<p><a href="{{chapter.url}}">{{chapter.url}}</a></p>
+<p>{{chapter.location}}</p>
+<p>{{chapter.description}}</p>
+<p>
+	<a ui-sref="app.chapters.detail.events.list({ chapterId: chapter.id })">{{chapter.event_count}}
+		<span ng-pluralize count="chapter.event_count" when="{'1': 'hash', 'other': 'hashes'}"></span></a>
+	&bull;
+	<a ui-sref="app.chapters.detail.participants.list({ chapterId: chapter.id })">{{chapter.participant_count}}
+		<span ng-pluralize count="chapter.participant_count" when="{'1': 'hasher', 'other': 'hashers'}"></span></a>
+</p>
+<div ui-view></div>

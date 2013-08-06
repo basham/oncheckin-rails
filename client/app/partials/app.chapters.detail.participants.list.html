@@ -1,0 +1,13 @@
+<h3>Hashers</h3>
+<ul>
+	<li ng-repeat="participant in participants">
+		<a href="#/hashers/{{participant.id}}">{{participant.alias}} ({{participant.first_name}} {{participant.last_name}})</a>
+		<p>
+			<a ui-sref="app.chapters.detail.events({ chapterId: chapter.id })">{{participant.attendance_count}}
+				<span ng-pluralize count="participant.attendance_count" when="{'1': 'hash', 'other': 'hashes'}"></span></a>
+			&bull;
+			<a ui-sref="app.chapters.detail.participants({ chapterId: chapter.id })">{{participant.host_count}}
+				<span ng-pluralize count="participant.host_count" when="{'1': 'hare', 'other': 'hares'}"></span></a>
+		</p>
+	</li>
+</ul>

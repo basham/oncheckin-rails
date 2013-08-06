@@ -1,0 +1,6 @@
+<h2>Kennels</h2>
+<ul>
+	<li ng-repeat="chapter in chapters">
+		<a ui-sref="app.chapters.detail({ chapterId: chapter.id })">{{chapter.name}}</a>
+	</li>
+</ul>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('clientApp')
+angular.module('oncheckinApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
