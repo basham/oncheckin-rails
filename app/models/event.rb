@@ -18,13 +18,13 @@ class Event < ActiveRecord::Base
 	has_many :attendances
 	has_many :participants, through: :attendances
 
-	def hares
+	def hosts
 		# Only participants
 		#ids = attendances.tagged_with('hare').collect { |a| a.participant_id }
 		#Participant.find( ids )
 
 		# Nested `attendence > participant` model
-		attendances.includes(:participant).tagged_with('hare')
+		attendances.includes(:participant).tagged_with('host')
 	end
 
 	#def serializable_hash(options={})

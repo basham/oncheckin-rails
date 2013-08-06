@@ -1,10 +1,6 @@
 class ChapterParticipantsSerializer < ActiveModel::Serializer
 	attributes :id, :first_name, :last_name, :full_name, :alias, :attendance_count, :host_count
 
-	def full_name
-		"#{object.first_name} #{object.last_name}"
-	end
-
 	def chapter_id
 		options[:url_options][:_recall][:chapter_id]
 	end

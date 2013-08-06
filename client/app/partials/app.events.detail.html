@@ -1,16 +1,20 @@
 <h1>{{event.name}}</h1>
 <a ui-sref="app.chapters.detail({ chapterId: event.chapter.id })">{{event.chapter.name}}</a>
 <p>{{event.start_time | date:'fullDate'}}</p>
+<p>{{event.description}}</p>
 
-<h3>Attendees</h3>
+<h3>{{event.host_count}} <span ng-pluralize count="event.host_count" when="{'1': 'Hare', 'other': 'Hares'}"></span></h3>
 <ul>
-	<li ng-repeat="attendance in event.attendances">
+	<li ng-repeat="attendance in event.attendances | filter:{host:'true'}">
 		<a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
 		<span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
-		<!--
-		<span ng-repeat="tag_id in attendance.tag_ids">
-			<span ng-init="tag = _.findWhere(event.tags, {id: tag_id})">{{tag_id}} {{tag.name}}</span>
-		</span>
-	-->
+	</li>
+</ul>
+
+<h3>{{event.guest_count}} <span ng-pluralize count="event.guest_count" when="{'1': 'Harrier', 'other': 'Harriers'}"></span></h3>
+<ul>
+	<li ng-repeat="attendance in event.attendances | filter:{host:'false'}">
+		<a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
+		<span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
 	</li>
 </ul>
