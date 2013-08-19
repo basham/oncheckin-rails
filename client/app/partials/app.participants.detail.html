@@ -1,0 +1,18 @@
+<h1>{{participant.alias}} ({{participant.full_name}})</h1>
+
+<a>{{participant.attendance_count}} <span ng-pluralize count="participant.attendance_count" when="{'1': 'hash', 'other': 'hashes'}"></span></a> &bull;
+<a>{{participant.host_count}} <span ng-pluralize count="participant.host_count" when="{'1': 'hare', 'other': 'hares'}"></span></a>
+
+<h3>Kennels</h3>
+<ul>
+	<li ng-repeat="chapter in participant.chapters">
+		<a ui-sref="app.chapters.detail({ chapterId: chapter.id })">{{chapter.name}}</a> ({{chapter.location}})
+		<p>
+			{{chapter.attendance_count}}
+			<span ng-pluralize count="chapter.attendance_count" when="{'1': 'hash', 'other': 'hashes'}"></span>
+			&bull;
+			{{chapter.host_count}}
+			<span ng-pluralize count="chapter.host_count" when="{'1': 'hare', 'other': 'hares'}"></span>
+		</p>
+	</li>
+</ul>

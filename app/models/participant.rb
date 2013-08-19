@@ -16,43 +16,25 @@ class Participant < ActiveRecord::Base
 	has_many :attendances
 	has_many :events, through: :attendances
 
-	def serializable_hash(options={})
-		default = { except: [:created_at, :updated_at] }
-		options = options.merge(default) { |k, x, y| x + y }
-		hash = super options
-
-		hash[:affiliation_count] = affiliations.count
-		hash[:attendance_count] = affiliations.sum(:attendance_count)
-		hash[:host_count] = affiliations.sum(:host_count)
-
-		hash[:affiliations] = affiliations.map do |a|
-			a.serializable_hash({
-				except: [:participant_id, :chapter_id],
-				include: {
-					chapter: { only: [:id, :name] }
-				}
-			})
-		end
-
-		hash[:attendances] = attendances.map do |a|
-			a.serializable_hash({
-				except: [:participant_id],
-				include: {
-					event: { only: [:id, :name, :start_time] },
-					chapter: { only: [:id, :name] }
-				}
-			})
-		end
-
-		hash
-	end
+	scope :match, lambda { |query|
+		q = "%#{query}%"
+		where('first_name LIKE ? OR last_name LIKE ? OR alias LIKE ?', q, q, q)
+	}
 
 	def full_name
 		"#{first_name} #{last_name}"
 	end
 
+	def attendance_count
+		affiliations.sum(:attendance_count)
+	end
+
 	def hosts
 		attendances.tagged_with('host')
+	end
+
+	def host_count
+		affiliations.sum(:host_count)
 	end
 
 	def hosts_by_chapter(chapter_id)

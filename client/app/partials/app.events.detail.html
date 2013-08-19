@@ -3,6 +3,16 @@
 <p>{{event.start_time | date:'fullDate'}}</p>
 <p>{{event.description}}</p>
 
+<p>
+	<button class="btn" ng-click="openNewParticipantDialog()">New Hasher</button>
+</p>
+
+<p>
+	<input type="text" ng-model="selectedParticipant" typeahead-editable="false"
+		typeahead="participant as participant.alias + ' (' + participant.full_name + ')' for participant in getParticipants($viewValue)"
+		typeahead-on-select="onSelectParticipant($item, $model, $label)"/>
+</p>
+
 <h3>{{event.host_count}} <span ng-pluralize count="event.host_count" when="{'1': 'Hare', 'other': 'Hares'}"></span></h3>
 <ul>
 	<li ng-repeat="attendance in event.attendances | filter:{host:'true'}">

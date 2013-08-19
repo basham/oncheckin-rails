@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('oncheckinApp', ['ngResource', 'ui.compat'])
+angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
 	.config(function($stateProvider, $routeProvider, $urlRouterProvider) {
 
 		//
@@ -72,8 +72,24 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat'])
 				.state('app.events.detail', {
 					url: '/{eventId}',
 					templateUrl: 'partials/app.events.detail.html',
-					controller: function($scope, $state, Event) {
+					controller: function($scope, $state, Event, QueryChapterParticipants, Participant, NewParticipantDialog) {
 						$scope.event = Event.get({ eventId: $state.params.eventId });
+
+						// For whatever reason, $resource isn't returning the right kind of promises
+						// that would make Typeahead work. So use $http.
+						$scope.getParticipants = function(query) {
+							return QueryChapterParticipants($scope.event.chapter.id, query);
+						};
+
+						$scope.onSelectParticipant = function($item, $model, $label) {
+							var p = new Participant();
+							p.$attend({ participantId: $model.id, event_id: $scope.event.id });
+							$scope.selectedParticipant = '';
+						};
+
+						$scope.openNewParticipantDialog = function() {
+							var d = NewParticipantDialog($scope.event.chapter.id, $scope.event.id).open();
+						};
 					}
 				})
 			.state('app.participants', {

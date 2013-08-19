@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 20130705031755) do
   create_table "affiliations", force: true do |t|
     t.integer  "participant_id"
     t.integer  "chapter_id"
-    t.integer  "recorded_attendance_count"
-    t.integer  "recorded_host_count"
+    t.integer  "recorded_attendance_count",   default: 0
+    t.integer  "recorded_host_count",         default: 0
     t.date     "recorded_since"
-    t.integer  "unrecorded_attendance_count"
-    t.integer  "unrecorded_host_count"
-    t.integer  "attendance_count"
-    t.integer  "host_count"
+    t.integer  "unrecorded_attendance_count", default: 0
+    t.integer  "unrecorded_host_count",       default: 0
+    t.integer  "attendance_count",            default: 0
+    t.integer  "host_count",                  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

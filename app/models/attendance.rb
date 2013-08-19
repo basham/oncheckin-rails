@@ -16,17 +16,7 @@ class Attendance < ActiveRecord::Base
 	acts_as_taggable_on :tags
 
 	after_save :calculate_affiliation_counts
-
-	def serializable_hash(options={})
-		default = { except: [:created_at, :updated_at, :tags, :event_id] }
-		options = options.merge(default) { |k, x, y| x + y }
-		hash = super options
-		hash[:tags] = tag_list - ['host']
-		hash[:host] = host?
-		#hash[:virgin] = virgin?
-		#hash[:visitor] = visitor?
-		hash
-	end
+	before_destroy :calculate_affiliation_counts
 
 	def chapter
 		event.chapter
@@ -34,14 +24,6 @@ class Attendance < ActiveRecord::Base
 
 	def host?
 		tag_list.include? 'host'
-	end
-
-	def virgin?
-		tag_list.include? 'virgin'
-	end
-
-	def visitor?
-		tag_list.include? 'visitor'
 	end
 
 	def calculate_affiliation_counts

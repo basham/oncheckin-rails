@@ -4,15 +4,15 @@ class CreateAffiliations < ActiveRecord::Migration
       t.belongs_to :participant
       t.belongs_to :chapter
       
-      t.integer :recorded_attendance_count
-      t.integer :recorded_host_count
+      t.integer :recorded_attendance_count, :default => 0
+      t.integer :recorded_host_count, :default => 0
       t.date :recorded_since
 
-      t.integer :unrecorded_attendance_count
-      t.integer :unrecorded_host_count
+      t.integer :unrecorded_attendance_count, :default => 0
+      t.integer :unrecorded_host_count, :default => 0
 
-      t.integer :attendance_count
-      t.integer :host_count
+      t.integer :attendance_count, :default => 0
+      t.integer :host_count, :default => 0
 
       t.timestamps
     end
