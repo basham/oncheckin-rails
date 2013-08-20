@@ -14,7 +14,12 @@ angular.module('oncheckinApp')
       participant.first_name = $scope.firstName;
       participant.last_name = $scope.lastName;
       participant.alias = $scope.alias;
-      participant.chapter_id = chapterId;
+      participant.affiliation = {
+        chapter_id: chapterId,
+        recorded_since: $scope.recordedSince,
+        recorded_attendance_count: $scope.recordedAttendanceCount,
+        recorded_host_count: $scope.recordedHostCount
+      };
       //participant.event_id = eventId;
       participant.$save(function(p, h) {
         console.log(p, h);

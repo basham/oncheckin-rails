@@ -13,7 +13,7 @@ class ParticipantsController < ApplicationController
 
   def create
     p = Participant.create(participant_params)
-    a = p.affiliations.create(chapter_id: params[:chapter_id])
+    a = p.affiliations.create(affiliation_params)
     # if params.has_key?(:chapter_id)
     render json: p, serializer: ParticipantSerializer
   end
@@ -27,6 +27,10 @@ class ParticipantsController < ApplicationController
 
     def participant_params
       params.require(:participant).permit(:first_name, :last_name, :alias)
+    end
+
+    def affiliation_params
+      params.require(:affiliation).permit(:chapter_id, :recorded_since, :recorded_attendance_count, :recorded_host_count)
     end
 
 end

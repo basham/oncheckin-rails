@@ -18,8 +18,8 @@
 		<fieldset>
 			<legend>Historic records</legend>
 			<div class="form-group">
-				<label for="recordedEventCount">Recorded Hashes</label>
-				<input type="number" id="recordedEventCount" ng-model="recordedEventCount" class="form-control"/>
+				<label for="recordedAttendanceCount">Recorded Hashes</label>
+				<input type="number" id="recordedAttendanceCount" ng-model="recordedAttendanceCount" class="form-control"/>
 			</div>
 			<div class="form-group">
 				<label for="recordedHostCount">Recorded Hares</label>
@@ -27,7 +27,7 @@
 			</div>
 			<div class="form-group">
 				<label for="recordedSince">Records as of date</label>
-				<input type="date" date-format="yyyy-mm-dd"/>
+				<input type="date" id="recordedSince" ng-model="recordedSince" date-format="yyyy-mm-dd"/>
 			</div>
 		</fieldset>
 

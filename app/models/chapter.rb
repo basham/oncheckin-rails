@@ -13,7 +13,7 @@
 #
 
 class Chapter < ActiveRecord::Base
-	has_many :events
-	has_many :affiliations
-	has_many :participants, through: :affiliations
+  has_many :events
+  has_many :affiliations
+  has_many :participants, through: :affiliations
 end

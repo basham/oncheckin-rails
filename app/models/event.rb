@@ -14,12 +14,12 @@
 #
 
 class Event < ActiveRecord::Base
-	belongs_to :chapter
-	has_many :attendances
-	has_many :participants, through: :attendances
+  belongs_to :chapter
+  has_many :attendances
+  has_many :participants, through: :attendances
 
-	def hosts
-		# Nested `attendence > participant` model
-		attendances.includes(:participant).tagged_with('host')
-	end
+  def hosts
+    # Nested `attendence > participant` model
+    attendances.includes(:participant).tagged_with('host')
+  end
 end
