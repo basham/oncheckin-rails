@@ -1,44 +1,43 @@
-<div class="modal-dialog">
-  <div class="modal-content"> 
-    <div class="modal-header">
-      <button type="button" class="close" aria-hidden="true" ng-click="close()">&times;</button>
-      <h4 class="modal-title">New Hasher</h4>
-    </div>
-    <div class="modal-body">
-      <form role="form" name="newParticipantForm">
-        <div class="form-group">
+<modal title="Create New Hasher" close="close()">
+  <div class="modal-body">
+    <form role="form" name="newParticipantForm">
+      <div class="controls row">
+        <div class="form-group col-xs-6">
           <label for="firstName">First Name</label>
           <input type="text" id="firstName" ng-model="participant.firstName" class="form-control"/>
         </div>
-        <div class="form-group">
+        <div class="form-group col-xs-6">
           <label for="lastName">Last Name</label>
           <input type="text" id="lastName" ng-model="participant.lastName" class="form-control"/>
         </div>
-        <div class="form-group">
-          <label for="alias">Hash Name</label>
-          <input type="text" id="alias" ng-model="participant.alias" class="form-control" placeholder="Just {{participant.firstName}}"/>
-        </div>
-        <fieldset>
-          <legend>Historic records</legend>
-          <div class="form-group">
-            <label for="recordedAttendanceCount">Recorded Hashes</label>
+      </div>
+      <div class="form-group">
+        <label for="alias">Hash Name</label>
+        <input type="text" id="alias" ng-model="participant.alias" class="form-control" placeholder="Just {{participant.firstName}}"/>
+      </div>
+      <fieldset>
+        <legend>Historic records</legend>
+        <div class="controls row">
+          <div class="form-group col-xs-3">
+            <label for="recordedAttendanceCount">Hashes</label>
             <input type="number" id="recordedAttendanceCount" ng-model="participant.recordedAttendanceCount" class="form-control"/>
           </div>
-          <div class="form-group">
-            <label for="recordedHostCount">Recorded Hares</label>
+          <div class="form-group col-xs-3">
+            <label for="recordedHostCount">Hares</label>
             <input type="number" id="recordedHostCount" ng-model="participant.recordedHostCount" class="form-control"/>
           </div>
-          <div class="form-group">
+          <div class="form-group col-xs-6">
             <label for="recordedSince">Records as of date</label>
-            <input type="date" id="recordedSince" ng-model="participant.recordedSince" date-format="yyyy-mm-dd"/>
+            <input type="date" id="recordedSince" ng-model="participant.recordedSince" date-format="yyyy-mm-dd" class="form-control"/>
           </div>
-        </fieldset>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-default" ng-click="close()">Close</button>
-      <button class="btn btn-default" ng-click="saveAndAttend()" ng-if="isWithinEvent">Save and attend</button>
-      <button class="btn btn-primary" ng-click="save()">Save</button>
-    </div>
+        </div>
+
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="close()">Close</button>
+    <button class="btn btn-default" ng-click="saveAndAttend()" ng-if="isWithinEvent">Save and attend</button>
+    <button class="btn btn-primary" ng-click="save()">Save</button>
   </div>
 </div>

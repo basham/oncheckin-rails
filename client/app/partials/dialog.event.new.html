@@ -1,28 +1,43 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" aria-hidden="true" ng-click="close()">&times;</button>
-      <h4 class="modal-title">New Hash</h4>
-    </div>
-    <div class="modal-body">
-      <form role="form" name="newEventForm">
-        <div class="form-group">
-          <label for="eventName">Name</label>
-          <input type="text" id="eventName" ng-model="eventName" class="form-control"/>
+<modal title="Create New Hash" close="close()">
+  <div class="modal-body">
+    <form role="form" name="newEventForm">
+      <div class="form-group">
+        <label for="eventName">Name</label>
+        <input type="text" id="eventName" ng-model="eventName" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" ng-model="description" class="form-control"></textarea>
+      </div>
+      <label class="control-label">From</label>
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <label for="startDate" class="sr-only">Start date</label>
+          <input type="date" id="startDate" ng-model="event.startDate" date-format="yyyy-mm-dd" class="form-control"/>
         </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" ng-model="description" class="form-control"></textarea>
+        <div class="form-group col-xs-4">
+          <label for="startTime" class="sr-only">Start time</label>
+          <input type="time" id="startTime" ng-model="event.startTime" class="form-control" step="900"/>
         </div>
-        <div class="form-group">
-          <label for="date">Date</label>
-          <input type="date" id="date" ng-model="date" date-format="yyyy-mm-dd"/>
+        <div class="form-group col-xs-2" ng-init="editEndTime = false">
+          <a class="form-control-static" ng-click="editEndTime = true; event.endDate = event.startDate" ng-hide="editEndTime">End time?</a>
         </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-default" ng-click="close()">Close</button>
-      <button class="btn btn-primary" ng-click="save()">Save</button>
-    </div>
+      </div>
+      <label class="control-label" ng-show="editEndTime">To</label>
+      <div class="row" ng-show="editEndTime">
+        <div class="form-group col-xs-6">
+          <label for="endDate" class="sr-only">End date</label>
+          <input type="date" id="endDate" ng-model="event.endDate" date-format="yyyy-mm-dd" class="form-control" min="event.startDate"/>
+        </div>
+        <div class="form-group col-xs-4">
+          <label for="endTime" class="sr-only">End time</label>
+          <input type="time" id="endTime" ng-model="event.endTime" class="form-control" step="900"/>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="save()">Create</button>
+    <button class="btn btn-default" ng-click="close()">Close</button>
   </div>
 </div>

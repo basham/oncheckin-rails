@@ -12,7 +12,7 @@ angular.module('oncheckinApp')
   })
   .factory('QueryChapterParticipants', function ($http, limitToFilter) {
     return function(chapterId, query) {
-      return $http.get('/api/1/chapters/' + chapterId + '/participants?query=' + query)
+      return $http.get('/api/1/chapters/' + chapterId + '/participants?query=' + query, { cache: true })
       .then(function(response) {
         // TODO
         // Limit on server-side.

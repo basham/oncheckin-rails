@@ -7,6 +7,7 @@ class AttendancesController < ApplicationController
 
   def update
     a = Attendance.find(params[:id])
+    # Toggle the hosting status of an attendance
     a.host(params[:host].to_bool)
     a.save
     render json: a, serializer: AttendanceSerializer

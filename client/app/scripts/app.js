@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
+angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap', 'angular-cache'])
   .config(function($stateProvider, $routeProvider, $urlRouterProvider) {
 
     //
@@ -104,19 +104,31 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
             };
 
             $scope.openNewParticipantDialog = function() {
-              var d = NewParticipantDialog($scope.event.chapter.id, $scope.event.id).open();
+              var d = NewParticipantDialog($scope.event.chapter.id, $scope.event.id);
             };
 
             $scope.removeAttendance = function(attendance) {
               var a = new Attendance();
-              a.$delete({ attendanceId: attendance.id });
-              getEvent();
+              a.$delete({ attendanceId: attendance.id },function() {
+                // Success
+                $scope.event.attendances.splice( $scope.event.attendances.indexOf(attendance), 1 );
+                if( attendance.host )
+                  $scope.event.host_count += -1;
+                else
+                  $scope.event.guest_count += -1;
+              }, function() {
+                // Failure
+                // TODO Perhaps global message?
+              });
             };
 
             $scope.changeHostStatus = function(attendance, value) {
               var a = new Attendance();
-              a.$host({ attendanceId: attendance.id, host: value });
-              getEvent();
+              a.$host({ attendanceId: attendance.id, host: value }, function() {
+                attendance.host = value;
+                $scope.event.host_count += value ? 1 : -1;
+                $scope.event.guest_count += value ? -1 : 1;
+              });
             }
           }
         })
@@ -160,8 +172,16 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
             });
 
   })
-  .run(function($rootScope, $state, $stateParams) {
+  .run(function($rootScope, $state, $stateParams, $angularCacheFactory, $http) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     //$state.transitionTo('app.chapters.list');
+
+    $angularCacheFactory('defaultCache', {
+      maxAge: 90000, // Items added to this cache expire after 15 minutes.
+      cacheFlushInterval: 600000, // This cache will clear itself every hour.
+      aggressiveDelete: true // Items will be deleted from this cache right when they expire.
+    });
+
+    $http.defaults.cache = $angularCacheFactory.get('defaultCache');
   });
