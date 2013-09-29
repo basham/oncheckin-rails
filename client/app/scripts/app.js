@@ -29,8 +29,16 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
         .state('app.chapters.detail', {
           url: '/{chapterId}',
           templateUrl: 'partials/app.chapters.detail.html',
-          controller: function($scope, $state, Chapter) {
+          controller: function($scope, $state, Chapter, NewEventDialog, NewParticipantDialog) {
             $scope.chapter = Chapter.get({ chapterId: $state.params.chapterId });
+
+            $scope.openNewEventDialog = function() {
+              var d = NewEventDialog($state.params.chapterId);
+            };
+
+            $scope.openNewParticipantDialog = function() {
+              var d = NewParticipantDialog($state.params.chapterId);
+            };
           }
         })
           .state('app.chapters.detail.events', {
@@ -78,6 +86,8 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
               $scope.event = Event.get({ eventId: $state.params.eventId });
             };
 
+            $scope.selectedParticipant = { query: '' };
+
             getEvent();
 
             // For whatever reason, $resource isn't returning the right kind of promises
@@ -89,7 +99,7 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap'])
             $scope.onSelectParticipant = function($item, $model, $label) {
               var p = new Participant();
               p.$attend({ participantId: $model.id, event_id: $scope.event.id });
-              $scope.selectedParticipant = '';
+              $scope.selectedParticipant.query = '';
               getEvent();
             };
 

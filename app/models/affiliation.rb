@@ -20,6 +20,8 @@ class Affiliation < ActiveRecord::Base
   belongs_to :chapter
   belongs_to :participant
 
+  after_create :calculate_counts
+
   def calculate_counts
     # Preload queries
     attended_events = participant.events.where(chapter_id: chapter_id)

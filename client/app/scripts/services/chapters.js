@@ -12,7 +12,8 @@ angular.module('oncheckinApp')
   })
   .factory('QueryChapterParticipants', function ($http, limitToFilter) {
     return function(chapterId, query) {
-      return $http.get('/api/1/chapters/' + chapterId + '/participants?query=' + query).then(function(response) {
+      return $http.get('/api/1/chapters/' + chapterId + '/participants?query=' + query)
+      .then(function(response) {
         // TODO
         // Limit on server-side.
         return limitToFilter(response.data, 10);
@@ -37,17 +38,29 @@ angular.module('oncheckinApp')
       host: { method: 'PUT' }
     });
   })
-  .factory('NewParticipantDialog', function ($dialog) {
-    var options = {
-      backdrop: true,
-      keyboard: true,
-      backdropClick: true,
-      templateUrl: 'partials/dialog.participant.new.html',
-      controller: 'NewParticipantDialogCtrl'
+  .factory('NewEventDialog', function ($modal) {
+    return function(chapterId) {
+      return $modal.open({
+        templateUrl: 'partials/dialog.event.new.html',
+        controller: 'NewEventDialogCtrl',
+        resolve: {
+          chapterId: function() { return chapterId; }
+        }
+      });
     };
+  })
+  .factory('NewParticipantDialog', function ($modal) {
     return function(chapterId, eventId) {
-      options.chapterId = chapterId;
-      options.eventId = eventId;
-      return $dialog.dialog(options);
+      return $modal.open({
+        templateUrl: 'partials/dialog.participant.new.html',
+        controller: 'NewParticipantDialogCtrl',
+        resolve: {
+          chapterId: function() { return chapterId; },
+          eventId: function() { return eventId; }
+        }
+      });
+      //.result.then(function(participant) {
+      //  participant.$save();
+      //});
     };
   });

@@ -2,18 +2,21 @@
   "name": "client",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "PatternConsulting/bower-angular#1.1.5",
+    "angular": "PatternConsulting/bower-angular#v1.1.5",
     "json3": "~3.2.4",
-    "jquery": "~1.9.1",
-    "bootstrap-sass": "~2.3.1",
-    "es5-shim": "~2.0.8",
-    "angular-resource": "PatternConsulting/bower-angular#1.1.5",
-    "angular-cookies": "PatternConsulting/bower-angular#1.1.5",
-    "angular-sanitize": "PatternConsulting/bower-angular#1.1.5",
-    "angular-ui-router": "git://github.com/angular-ui/ui-router.git#~0.0.1"
+    "jquery": "~2.0.3",
+    "bootstrap-sass": "~3.0.0",
+    "es5-shim": "~2.1.0",
+    "angular-resource": "PatternConsulting/bower-angular#v1.1.5",
+    "angular-cookies": "PatternConsulting/bower-angular#v1.1.5",
+    "angular-sanitize": "PatternConsulting/bower-angular#v1.1.5",
+    "angular-ui-router": "git://github.com/angular-ui/ui-router.git#~0.0.1",
+    "angular-ui-bootstrap-bower": "~0.6.0",
+    "underscore": "~1.5.2",
+    "angular-ui-bootstrap": "~0.6.0"
   },
   "devDependencies": {
-    "angular-mocks": "PatternConsulting/bower-angular#1.1.5",
-    "angular-scenario": "PatternConsulting/bower-angular#1.1.5"
+    "angular-mocks": "PatternConsulting/bower-angular#v1.1.5",
+    "angular-scenario": "PatternConsulting/bower-angular#v1.1.5"
   }
 }
