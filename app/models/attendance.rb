@@ -22,6 +22,14 @@ class Attendance < ActiveRecord::Base
     event.chapter
   end
 
+  def host value
+    if value
+      tag_list.add('host')
+    else
+      tag_list.remove('host')
+    end
+  end
+
   def host?
     tag_list.include? 'host'
   end

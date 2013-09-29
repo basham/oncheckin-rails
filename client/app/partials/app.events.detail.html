@@ -4,27 +4,35 @@
 <p>{{event.description}}</p>
 
 <p>
-	<button class="btn" ng-click="openNewParticipantDialog()">New Hasher</button>
+  <button class="btn" ng-click="openNewParticipantDialog()">New Hasher</button>
 </p>
 
 <p>
-	<input type="text" ng-model="selectedParticipant" typeahead-editable="false"
-		typeahead="participant as participant.alias + ' (' + participant.full_name + ')' for participant in getParticipants($viewValue)"
-		typeahead-on-select="onSelectParticipant($item, $model, $label)"/>
+  <input type="text" ng-model="selectedParticipant" typeahead-editable="false"
+    typeahead="participant as participant.alias + ' (' + participant.full_name + ')' for participant in getParticipants($viewValue)"
+    typeahead-on-select="onSelectParticipant($item, $model, $label)"/>
 </p>
 
 <h3>{{event.host_count}} <span ng-pluralize count="event.host_count" when="{'1': 'Hare', 'other': 'Hares'}"></span></h3>
 <ul>
-	<li ng-repeat="attendance in event.attendances | filter:{host:'true'}">
-		<a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
-		<span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
-	</li>
+  <li ng-repeat="attendance in event.attendances | filter:{host:'true'}">
+    <a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
+    <span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
+    <p>
+      <a class="btn btn-small" ng-click="removeAttendance(attendance)">Remove attendance</a>
+      <a class="btn btn-small" ng-click="changeHostStatus(attendance, false)">Remove as hare</a>
+    </p>
+  </li>
 </ul>
 
 <h3>{{event.guest_count}} <span ng-pluralize count="event.guest_count" when="{'1': 'Harrier', 'other': 'Harriers'}"></span></h3>
 <ul>
-	<li ng-repeat="attendance in event.attendances | filter:{host:'false'}">
-		<a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
-		<span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
-	</li>
+  <li ng-repeat="attendance in event.attendances | filter:{host:'false'}">
+    <a ui-sref="app.participants.detail({ participantId: attendance.participant.id })">{{attendance.participant.alias}} ({{attendance.participant.full_name}})</a>
+    <span ng-repeat="tag in attendance.tags">{{tag.name}}</span>
+    <p>
+      <a class="btn btn-small" ng-click="removeAttendance(attendance)">Remove attendance</a>
+      <a class="btn btn-small" ng-click="changeHostStatus(attendance, true)">Make hare</a>
+    </p>
+  </li>
 </ul>

@@ -33,7 +33,9 @@ angular.module('oncheckinApp')
     //};
   })
   .factory('Attendance', function ($resource) {
-    return $resource('/api/1/attendances/:attendanceId', { attendanceId: '@id' });
+    return $resource('/api/1/attendances/:attendanceId', { attendanceId: '@id' }, {
+      host: { method: 'PUT' }
+    });
   })
   .factory('NewParticipantDialog', function ($dialog) {
     var options = {
