@@ -4,8 +4,8 @@
 <p>{{chapter.location}}</p>
 <p>{{chapter.description}}</p>
 <p>
-  <button class="btn" ng-click="openNewEventDialog()">New Hash</button>
-  <button class="btn" ng-click="openNewParticipantDialog()">New Hasher</button>
+  <button class="btn btn-default" ng-click="openNewEventDialog()">New Hash</button>
+  <button class="btn btn-default" ng-click="openNewParticipantDialog()">New Hasher</button>
 </p>
 <p>
 	<a ui-sref="app.chapters.detail.events.list({ chapterId: chapter.id })">{{chapter.event_count}}
