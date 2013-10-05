@@ -1,0 +1,29 @@
+<p>
+  <a ui-sref="app.events.detail({ eventId: event.id })">Back</a>
+  &bull;
+  <a ui-sref="app.chapters.detail.events.list({ chapterId: event.chapter.id })">{{event.chapter.name}} Events</a>
+</p>
+
+<h1>{{event.name}} (#{{event.id}})</h1>
+<p>{{event.start_time | date:'fullDate'}}</p>
+
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Hash Name</th>
+    <th>Sign in</th>
+    <th>Hashes after sign in</th>
+    <th>Last Hash</th>
+    <th>Hares</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="attendance in event.attendances">
+      <td>{{attendance.participant.full_name}}</td>
+      <td>{{attendance.participant.alias}}</td>
+      <td><span ng-if="attendance.host">HARE<span></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

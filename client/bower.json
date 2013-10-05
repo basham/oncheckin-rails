@@ -10,7 +10,7 @@
     "angular-resource": "PatternConsulting/bower-angular#v1.1.5",
     "angular-cookies": "PatternConsulting/bower-angular#v1.1.5",
     "angular-sanitize": "PatternConsulting/bower-angular#v1.1.5",
-    "angular-ui-router": "git://github.com/angular-ui/ui-router.git#~0.0.1",
+    "angular-ui-router": "0.2.0",
     "angular-ui-bootstrap-bower": "~0.6.0",
     "underscore": "~1.5.2",
     "angular-ui-bootstrap": "~0.6.0"

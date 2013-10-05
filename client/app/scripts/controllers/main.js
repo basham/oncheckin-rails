@@ -3,50 +3,39 @@
 angular.module('oncheckinApp')
   .controller('MainCtrl', function ($scope) {
   })
-  .controller('NewEventDialogCtrl', function ($scope, $modalInstance, chapterId) {
+  .controller('NewEventDialogCtrl', function ($scope, $modalInstance, chapterId, Event, $filter) {
 
-    $scope.close = function(result) {
-      $modalInstance.close(result);
-    };
-
-    //console.log($scope);
-    //var chapterId = $modalInstance.options.chapterId;
-    /*
-    var eventId = $modalInstance.options.eventId;
-    
-    $scope.isWithinEvent = angular.isDefined(eventId);
+    $scope.event = {};
+    $scope.event.startDate = $filter('date')(Date.now(), 'yyyy-MM-dd');
 
     var save = function() {
-      var participant = new Participant();
-      participant.first_name = $scope.firstName;
-      participant.last_name = $scope.lastName;
-      participant.alias = $scope.alias;
-      participant.affiliation = {
-        chapter_id: chapterId,
-        recorded_since: $scope.recordedSince,
-        recorded_attendance_count: $scope.recordedAttendanceCount,
-        recorded_host_count: $scope.recordedHostCount
-      };
-      //participant.event_id = eventId;
-      participant.$save(function(p, h) {
+      var event = new Event();
+      event.chapter_id = chapterId;
+      event.name = $scope.event.name;
+      event.description = $scope.event.description;
+
+      var timezone = 'EDT';
+
+      var startTime = [$scope.event.startDate, $scope.event.startTime, timezone].join(' ');
+      event.start_time = startTime;
+
+      var endTime = [$scope.event.endDate, $scope.event.endTime, timezone].join(' ');
+      event.end_time = $scope.event.endTime;
+
+      event.$save(function(p, h) {
         console.log(p, h);
       });
+//console.log(event);
+      return event;
     };
 
     $scope.save = function() {
-      //console.log($scope);
-      save();
-      $scope.close();
-    };
-
-    $scope.saveAndAttend = function() {
-      $scope.close();
+      $scope.close(save());
     };
 
     $scope.close = function(result) {
       $modalInstance.close(result);
     };
-    */
   })
   .controller('NewParticipantDialogCtrl', function ($scope, $modalInstance, chapterId, eventId, Participant) {
     

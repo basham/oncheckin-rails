@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap', 'angular-cache'])
+angular.module('oncheckinApp', ['ngResource', 'ui.router', 'ui.bootstrap', 'angular-cache'])
   .config(function($stateProvider, $routeProvider, $urlRouterProvider) {
 
     //
@@ -43,7 +43,7 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap', 'angu
         })
           .state('app.chapters.detail.events', {
             abstract: true,
-            url: '/hashes',
+            url: '/events',
             template: '<div ui-view></div>'
           })
             .state('app.chapters.detail.events.list', {
@@ -67,7 +67,7 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap', 'angu
             })
       .state('app.events', {
         abstract: true,
-        url: '/hashes',
+        url: '/events',
         template: '<div ui-view></div>'
       })
         .state('app.events.list', {
@@ -130,6 +130,13 @@ angular.module('oncheckinApp', ['ngResource', 'ui.compat', 'ui.bootstrap', 'angu
                 $scope.event.guest_count += value ? -1 : 1;
               });
             }
+          }
+        })
+        .state('app.events.print', {
+          url: '/{eventId}/print',
+          templateUrl: 'partials/app.events.print.html',
+          controller: function($scope, $state, Event) {
+            $scope.event = Event.get({ eventId: $state.params.eventId });
           }
         })
       .state('app.participants', {

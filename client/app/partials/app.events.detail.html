@@ -1,10 +1,11 @@
+<a ui-sref="app.chapters.detail.events.list({ chapterId: event.chapter.id })">{{event.chapter.name}} Events</a>
+
 <h1>{{event.name}}</h1>
-<a ui-sref="app.chapters.detail({ chapterId: event.chapter.id })">{{event.chapter.name}}</a>
 <p>{{event.start_time | date:'fullDate'}}</p>
 <p>{{event.description}}</p>
-
 <p>
   <button class="btn btn-default" ng-click="openNewParticipantDialog()">New Hasher</button>
+  <a ui-sref="app.events.print({ eventId: event.id })" class="btn btn-default">Print</a>
 </p>
 
 <p>

@@ -5,7 +5,7 @@ angular.module('oncheckinApp')
     return $resource('/api/1/chapters');
   })
   .factory('Chapter', function ($resource) {
-    return $resource('/api/1/chapters/:chapterId', { chapterId: '@id' });
+    return $resource('/api/1/chapters/:chapterId', { chapterId: '@id' }, { cache: true});
   })
   .factory('ChapterParticipants', function ($resource) {
     return $resource('/api/1/chapters/:chapterId/participants', { chapterId: '@chapter_id' });

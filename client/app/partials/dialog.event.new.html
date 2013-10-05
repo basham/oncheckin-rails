@@ -1,19 +1,19 @@
-<modal title="Create New Hash" close="close()">
+<modal title="Create New Event" close="close()">
   <div class="modal-body">
     <form role="form" name="newEventForm">
       <div class="form-group">
         <label for="eventName">Name</label>
-        <input type="text" id="eventName" ng-model="eventName" class="form-control"/>
+        <input type="text" id="eventName" ng-model="event.name" class="form-control" required/>
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea id="description" ng-model="description" class="form-control"></textarea>
+        <textarea id="description" ng-model="event.description" class="form-control"></textarea>
       </div>
       <label class="control-label">From</label>
       <div class="row">
         <div class="form-group col-xs-6">
           <label for="startDate" class="sr-only">Start date</label>
-          <input type="date" id="startDate" ng-model="event.startDate" date-format="yyyy-mm-dd" class="form-control"/>
+          <input type="date" id="startDate" ng-model="event.startDate" date-format="yyyy-mm-dd" class="form-control" required/>
         </div>
         <div class="form-group col-xs-4">
           <label for="startTime" class="sr-only">Start time</label>

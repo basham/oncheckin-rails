@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
 	def index
 		# Chapter events
@@ -10,5 +11,16 @@ class EventsController < ApplicationController
 	def show
 		render json: Event.find(params[:id]), serializer: EventSerializer
 	end
+
+  def create
+    e = Chapter.find(params[:chapter_id]).events.create(event_params)
+    render json: e, serializer: EventSerializer
+  end
+
+  private
+
+    def event_params
+      params.require(:event).permit(:name, :description, :start_time, :end_time)
+    end
 
 end

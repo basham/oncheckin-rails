@@ -6,7 +6,7 @@
 <h3>Kennels</h3>
 <ul>
 	<li ng-repeat="chapter in participant.chapters">
-		<a ui-sref="app.chapters.detail({ chapterId: chapter.id })">{{chapter.name}}</a> ({{chapter.location}})
+		<a ui-sref="app.chapters.detail.participants.list({ chapterId: chapter.id })">{{chapter.name}}</a> ({{chapter.location}})
 		<p>
 			{{chapter.attendance_count}}
 			<span ng-pluralize count="chapter.attendance_count" when="{'1': 'hash', 'other': 'hashes'}"></span>
