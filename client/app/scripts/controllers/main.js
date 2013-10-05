@@ -25,7 +25,7 @@ angular.module('oncheckinApp')
       event.$save(function(p, h) {
         console.log(p, h);
       });
-//console.log(event);
+
       return event;
     };
 
