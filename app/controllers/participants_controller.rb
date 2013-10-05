@@ -20,7 +20,12 @@ class ParticipantsController < ApplicationController
 
   def update
     p = Participant.find(params[:id])
-    p.attendances.find_or_create_by_event_id(params[:event_id]) if params[:event_id]
+
+    if params[:event_id]
+      a = p.attendances.find_or_create_by_event_id(params[:event_id])
+      return render json: a, serializer: AttendanceSerializer
+    end
+
     render json: p, serializer: ParticipantSerializer
   end
 

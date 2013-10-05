@@ -82,13 +82,11 @@ angular.module('oncheckinApp', ['ngResource', 'ui.router', 'ui.bootstrap', 'angu
           templateUrl: 'partials/app.events.detail.html',
           controller: function($scope, $state, Event, QueryChapterParticipants, Participant, NewParticipantDialog, Attendance) {
             
-            var getEvent = function() {
-              $scope.event = Event.get({ eventId: $state.params.eventId });
-            };
+            // Load the event
+            $scope.event = Event.get({ eventId: $state.params.eventId });
 
+            // Set defaults
             $scope.selectedParticipant = { query: '' };
-
-            getEvent();
 
             // For whatever reason, $resource isn't returning the right kind of promises
             // that would make Typeahead work. So use $http.
@@ -98,38 +96,42 @@ angular.module('oncheckinApp', ['ngResource', 'ui.router', 'ui.bootstrap', 'angu
 
             $scope.onSelectParticipant = function($item, $model, $label) {
               var p = new Participant();
-              p.$attend({ participantId: $model.id, event_id: $scope.event.id });
+              p.$attend({ participantId: $model.id, event_id: $scope.event.id }, function(attendance) {
+                // Place the new attendance at the top of the guest list
+                $scope.event.attendances.unshift(attendance);
+                // Sync counters
+                $scope.event.guest_count += 1;
+              });
               $scope.selectedParticipant.query = '';
-              getEvent();
-            };
-
-            $scope.openNewParticipantDialog = function() {
-              var d = NewParticipantDialog($scope.event.chapter.id, $scope.event.id);
             };
 
             $scope.removeAttendance = function(attendance) {
               var a = new Attendance();
               a.$delete({ attendanceId: attendance.id },function() {
-                // Success
+                // Remove the attendance
                 $scope.event.attendances.splice( $scope.event.attendances.indexOf(attendance), 1 );
+                // Sync counters
                 if( attendance.host )
                   $scope.event.host_count += -1;
                 else
                   $scope.event.guest_count += -1;
-              }, function() {
-                // Failure
-                // TODO Perhaps global message?
               });
             };
 
             $scope.changeHostStatus = function(attendance, value) {
               var a = new Attendance();
               a.$host({ attendanceId: attendance.id, host: value }, function() {
+                // Update host status
                 attendance.host = value;
+                // Sync counters
                 $scope.event.host_count += value ? 1 : -1;
                 $scope.event.guest_count += value ? -1 : 1;
               });
             }
+
+            $scope.openNewParticipantDialog = function() {
+              var d = NewParticipantDialog($scope.event.chapter.id, $scope.event.id);
+            };
           }
         })
         .state('app.events.print', {
@@ -190,5 +192,5 @@ angular.module('oncheckinApp', ['ngResource', 'ui.router', 'ui.bootstrap', 'angu
       aggressiveDelete: true // Items will be deleted from this cache right when they expire.
     });
 
-    $http.defaults.cache = $angularCacheFactory.get('defaultCache');
+    //$http.defaults.cache = $angularCacheFactory.get('defaultCache');
   });
