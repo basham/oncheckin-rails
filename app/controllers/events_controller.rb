@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 	end
 
 	def show
+    return render json: Event.find(params[:id]), serializer: EventPrintSerializer if params[:format] == 'print'
 		render json: Event.find(params[:id]), serializer: EventSerializer
 	end
 

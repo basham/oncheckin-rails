@@ -25,6 +25,10 @@ class Participant < ActiveRecord::Base
     ([first_name, last_name] - ['', nil]).join(' ')
   end
 
+  def full_name_reverse
+    ([last_name, first_name] - ['', nil]).join(', ')
+  end
+
   def attendance_count
     affiliations.sum(:attendance_count)
   end

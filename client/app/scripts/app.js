@@ -137,8 +137,8 @@ angular.module('oncheckinApp', ['ngResource', 'ui.router', 'ui.bootstrap', 'angu
         .state('app.events.print', {
           url: '/{eventId}/print',
           templateUrl: 'partials/app.events.print.html',
-          controller: function($scope, $state, Event) {
-            $scope.event = Event.get({ eventId: $state.params.eventId });
+          controller: function($scope, $state, EventPrint) {
+            $scope.event = EventPrint.get({ eventId: $state.params.eventId });
           }
         })
       .state('app.participants', {

@@ -17,13 +17,13 @@
     <th>Hares</th>
   </thead>
   <tbody>
-    <tr ng-repeat="attendance in event.attendances">
-      <td>{{attendance.participant.full_name}}</td>
-      <td>{{attendance.participant.alias}}</td>
-      <td><span ng-if="attendance.host">HARE<span></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr ng-repeat="affiliation in event.affiliations">
+      <td>{{affiliation.participant.name}}</td>
+      <td>{{affiliation.participant.alias}}</td>
+      <td><span ng-if="affiliation.host">HARE<span></td>
+      <td>{{affiliation.attendance_count + 1}}</td>
+      <td>{{affiliation.last_attended_event_date}}</td>
+      <td>{{affiliation.host_count}}</td>
     </tr>
   </tbody>
 </table>

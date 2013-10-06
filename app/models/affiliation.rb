@@ -22,9 +22,22 @@ class Affiliation < ActiveRecord::Base
 
   after_create :calculate_counts
 
+  scope :active, -> {
+    events.where('start_time < ?', DateTime.now)#.includes(:attendance)
+  }
+
+  def attended_events
+    participant.events.where(chapter_id: chapter_id)
+  end
+
+  # Filter out future dates, which could reference
+  # a participant's scheduled host of an event
+  def last_attended_event
+    attended_events.where('start_time < ?', DateTime.now).order('start_time DESC').first
+  end
+
   def calculate_counts
     # Preload queries
-    attended_events = participant.events.where(chapter_id: chapter_id)
     hosts = participant.hosts_by_chapter_id(chapter_id)
 
     if recorded_since.nil?

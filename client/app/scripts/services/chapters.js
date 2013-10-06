@@ -26,6 +26,9 @@ angular.module('oncheckinApp')
   .factory('Event', function ($resource) {
     return $resource('/api/1/events/:eventId', { eventId: '@id' });
   })
+  .factory('EventPrint', function ($resource) {
+    return $resource('/api/1/events/:eventId.print', { eventId: '@id' });
+  })
   .factory('Participant', function ($resource) {
     //return function(options) {
       return $resource('/api/1/participants/:participantId', { participantId: '@id' }, {
